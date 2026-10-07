@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 23% 94%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+    --primary: 0 0% 7%;
+    --primary-foreground: 45 23% 94%;
+    --secondary: 45 10% 89%;
+    --secondary-foreground: 0 0% 7%;
+    --muted: 45 10% 89%;
+    --muted-foreground: 0 0% 35%;
+    --accent: 199 89% 61%;
+    --accent-foreground: 0 0% 7%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 7%;
+    --input: 0 0% 7%;
+    --ring: 199 89% 61%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  ::selection {
+    background: #38bdf8;
+    color: #111111;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f2efe9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #111111;
+    border-radius: 0;
+  }
+  @media (pointer: fine) {
+    .has-custom-cursor,
+    .has-custom-cursor a,
+    .has-custom-cursor button,
+    .has-custom-cursor input,
+    .has-custom-cursor textarea {
+      cursor: none;
+    }
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Chakra Petch', 'Inter', sans-serif;
+  }
+  .font-mono-tech {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  .text-stroke {
+    -webkit-text-stroke: 1.5px #f2efe9;
+    color: transparent;
+  }
+  .text-stroke-ink {
+    -webkit-text-stroke: 1.5px #111111;
+    color: transparent;
+  }
+  .text-stroke-azure {
+    -webkit-text-stroke: 1.5px #38bdf8;
+    color: transparent;
+  }
+  .grid-lines {
+    background-image:
+      repeating-linear-gradient(0deg, rgba(17, 17, 17, 0.06) 0 1px, transparent 1px 72px),
+      repeating-linear-gradient(90deg, rgba(17, 17, 17, 0.06) 0 1px, transparent 1px 72px);
+  }
+  .grid-lines-dark {
+    background-image:
+      repeating-linear-gradient(0deg, rgba(242, 239, 233, 0.05) 0 1px, transparent 1px 72px),
+      repeating-linear-gradient(90deg, rgba(242, 239, 233, 0.05) 0 1px, transparent 1px 72px);
+  }
+  .dots-pattern {
+    background-image: radial-gradient(rgba(17, 17, 17, 0.18) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+}
+
+/* ---------- keyframes ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+@keyframes scan-y {
+  0% { top: -10%; }
+  100% { top: 110%; }
+}
+@keyframes hud-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@keyframes data-stream {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 32s linear infinite;
+}
+.animate-marquee:hover,
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+.animate-spin-slow {
+  animation: spin-slow 14s linear infinite;
+}
+.animate-float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
+.caret-blink {
+  animation: blink-caret 1s step-end infinite;
+}
+.hud-blink {
+  animation: hud-blink 1.6s step-end infinite;
+}
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid #38bdf8;
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+/* scanline beam sweeping the hero */
+.scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #38bdf8;
+  opacity: 0.35;
+  animation: scan-y 7s linear infinite;
+  pointer-events: none;
+}
+
+/* HUD corner brackets */
+.hud-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-color: rgba(56, 189, 248, 0.7);
+  border-style: solid;
+  pointer-events: none;
+}
+.hud-corner-tl { top: 88px; left: 20px; border-width: 2px 0 0 2px; }
+.hud-corner-tr { top: 88px; right: 20px; border-width: 2px 2px 0 0; }
+.hud-corner-bl { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
+.hud-corner-br { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
